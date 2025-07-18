@@ -1,0 +1,10 @@
+mcp
+anthropic
+yfinance
+requests
+python-dotenv
+fastapi
+uvicorn
+websockets
+pydantic
+asyncio-mqtt
