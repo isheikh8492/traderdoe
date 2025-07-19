@@ -1,6 +1,7 @@
 import asyncio
 import json
 from typing import Dict, List, Any, Optional
+from datetime import datetime
 from anthropic import Anthropic
 from config import Config
 
@@ -81,12 +82,13 @@ Format your response as structured JSON with the following keys:
     
     async def generate_trade_alerts(self, analysis: Dict[str, Any], threshold: float = 0.7) -> List[Dict[str, Any]]:
         alerts = []
-        
+
         confidence = analysis.get("confidence_score", 0) / 100
         if confidence < threshold:
             return alerts
-        
+
         opportunities = analysis.get("trading_opportunities", [])
+        timestamp = datetime.now().isoformat()
         for opportunity in opportunities:
             if isinstance(opportunity, dict):
                 alert = {
@@ -95,10 +97,10 @@ Format your response as structured JSON with the following keys:
                     "action": opportunity.get("action", "Unknown"),
                     "reasoning": opportunity.get("reasoning", ""),
                     "confidence": confidence,
-                    "timestamp": report.get("generated_at", "")
+                    "timestamp": timestamp
                 }
                 alerts.append(alert)
-        
+
         return alerts
     
     async def analyze_chart_with_vision(self, chart_path: str, symbol: str) -> Dict[str, Any]:
