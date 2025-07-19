@@ -1,0 +1,19 @@
+servers:
+  yahoo_finance:
+    command: uv
+    args:
+      - --directory
+      - ${YAHOO_FINANCE_MCP_PATH}
+      - run
+      - yahoo-finance-mcp
+    env_file: yahoo_finance/.env
+  twitter:
+    command: node
+    args:
+      - ${TWITTER_MCP_PATH}/index.js
+    env_file: twitter/.env
+  tradingview:
+    command: python
+    args:
+      - ${TRADINGVIEW_CHART_MCP_PATH}/server.py
+    env_file: tradingview_chart/.env

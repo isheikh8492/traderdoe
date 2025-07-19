@@ -38,10 +38,12 @@ AI-powered trading analysis tool that aggregates data from multiple sources usin
    # Check PulseMCP or GitHub for Twitter MCP server implementations
    ```
    
-   **TradingView MCP:**
-   ```bash
-   # Use your existing TradingView MCP server
-   ```
+  **TradingView MCP:**
+  ```bash
+  git clone https://github.com/ertugrul59/tradingview-chart-mcp
+  cd tradingview-chart-mcp
+  pip install -e .
+  ```
 
 4. **Update Config**
    Edit `config.py` to match your MCP server installation paths.
@@ -84,10 +86,27 @@ Trading Copilot
 ## Configuration
 
 Update `config.py` with:
-- MCP server paths
 - Trading symbols to monitor
 - Sentiment analysis keywords
 - API configurations
+
+### MCP Server Configuration
+
+MCP servers are defined in `mcp_servers/servers.yaml`. Each server entry
+specifies the command used to launch it, command-line arguments, and an optional
+`.env` file containing server‑specific variables. Example:
+
+```yaml
+servers:
+  tradingview:
+    command: python
+    args:
+      - ${TRADINGVIEW_CHART_MCP_PATH}/server.py
+    env_file: tradingview_chart/.env
+```
+
+Environment files live inside the `mcp_servers/<server>/` directories. Copy the
+provided `.env.example` for each server and adjust the values to your setup.
 
 ## Example Output
 
